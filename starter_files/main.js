@@ -10,7 +10,7 @@ function question1 () {
     let avgPrice = 0;
     for (let i = 0; i < data.length; i++) {
         avgPrice = avgPrice + data[i].price;
-    } console.log("$"+(avgPrice/data.length).toFixed(2));   
+    } console.log("The average price is $"+(avgPrice/data.length).toFixed(2));   
 } 
 
 
@@ -23,19 +23,21 @@ function question2 () {
         if (data[i].price >= 14 && data[i].price <= 18){  
             bw1418.push(data[i].title);    
         }    
-    } console.log(bw1418); 
+    } console.log(bw1418.join("\r\n")); 
 } 
 
 
 
 // 3: Which item has a "GBP" currency code? Display it's name and price.
 function question3 () {
-    let $gbp = [];
+    let gbp = [];
+    let price = 0;
     for (let i = 0; i < data.length; i++) {
         if (data[i].currency_code === "GBP") {
-            $gbp.push("Item: [" + data[i].title + "] Price: $" + data[i].price + " (GBP)");
+            price = data[i].price;
+            gbp.push(data[i].title);
         }
-    } console.log($gbp);
+    } console.log(gbp + " costs " + price + " pounds.");
 }
 
 
@@ -45,10 +47,10 @@ function question4 () {
     for (let i = 0; i < data.length; i++) {
         for (let f = 0; f < data[i].materials.length; f++) {
         if (data[i].materials[f] === "wood") {
-            woodItem.push(data[i].title);
+            woodItem.push(data[i].title + " is made of wood.");
             }
         }
-    } console.log(woodItem);
+    } console.log(woodItem.join("\r\n"));
 }
 
 
@@ -56,12 +58,14 @@ function question4 () {
 //    Display the name, number of items and the items it is made of.
 function question5 () {
     let eightOrMore = [];
+    let matList = [];
     for (let i = 0; i < data.length; i++) {
         let totalMats = data[i].materials.length;
         if (data[i].materials.length >= 8) {
-            eightOrMore.push("Name: [" + data[i].title + "] Total: [" + totalMats + "] Materials: [" + data[i].materials + "]");
+            let matList = data[i].materials.join("\r\n" + "- ");
+            eightOrMore.push(data[i].title + " has " + totalMats + " materials:" + "\r\n" + "- " + matList);
         }
-    } console.log(eightOrMore); 
+    } console.log(eightOrMore.join("\r\n")); 
 }
 
 
@@ -75,5 +79,5 @@ function question6 () {
             madeBySellerCount++;
             madeBySeller = madeBySellerCount;
         }
-    } console.log(madeBySeller);
+    } console.log(madeBySeller + " items were made by their sellers.");
 }
